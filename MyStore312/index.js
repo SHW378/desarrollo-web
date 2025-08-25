@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const faker = require('faker');
 
 //Middleware to parse JSON bodies
 app.get("/", (req, res) => {
