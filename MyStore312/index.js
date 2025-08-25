@@ -50,6 +50,17 @@ app.get('/category/:categoryId/products/:productId', (req, res) => {
   });
 });
 
+app.get('/users', (req, res) => {
+  const { username, lastname } = req.query;
+  if (username && lastname ) {
+    res.json({
+      username,
+      lastname
+    });
+  } else {
+    res.send("No hay parametros Query");
+  }
+});
 /*
 GET = Obtiene datos
 POST = Crea datos
