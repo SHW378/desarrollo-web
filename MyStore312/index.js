@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const faker = require('faker');
+const routerApi = require('./routes/rutas')
 
 //Middleware to parse JSON bodies
 app.get("/", (req, res) => {
@@ -12,22 +13,11 @@ app.get("/nuevaruta", (req, res) => {
   res.send("Hola soy una nueva ruta")
 })
 
-
-
-
 app.listen(port, () => {
   console.log("Mi port is working on: " + port)
   console.log("http://localhost:" + port)
 })
 
-
-app.get('/category/:categoryId/products/:productId', (req, res) => {
-  const { categoryId, productId } = req.params;
-  res.json({
-    categoryId,
-    productId
-  });
-});
 
 app.get('/users', (req, res) => {
   const { username, lastname } = req.query;
@@ -40,6 +30,17 @@ app.get('/users', (req, res) => {
     res.send("No hay parametros Query");
   }
 });
+
+
+app.get('/category/:categoryId/products/:productId', (req, res) => {
+  const { categoryId, productId } = req.params;
+  res.json({
+    categoryId,
+    productId
+  });
+});
+
+routerApi(app);
 /*
 GET = Obtiene datos
 POST = Crea datos

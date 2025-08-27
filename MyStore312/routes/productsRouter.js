@@ -2,7 +2,7 @@ const faker = require('faker');
 const express = require('express');
 const router = require('router')
 
-router.get("/products", (req, res) => {
+router.get("/", (req, res) => {
   const products = [];
   const { size } = req.query;
   const limit = size || 10;
@@ -16,11 +16,11 @@ router.get("/products", (req, res) => {
   res.json(products);
 });
 
-router.get('/products/filter', (req, res) => {
+router.get('/filter', (req, res) => {
   res.send('Soy una ruta de filtro')
 })
 
-router.get("/products/:id", (req, res) =>{
+router.get("/:id", (req, res) =>{
   const { id } = req.params; // Extraemos el parametro id de los parametros ruta
   res.json({
     id: parseInt(id), // Devolvemos el id recibido
@@ -28,5 +28,7 @@ router.get("/products/:id", (req, res) =>{
     price: 50
   });
 });
+
+
 
 module.exports = router;
