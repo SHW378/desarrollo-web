@@ -1,7 +1,7 @@
 const productsRouter = require('./productsRouter')
 
 function routerApi(app) {
-  app.views('/products', productsRouter);
+  app.use('/products', productsRouter);
 }
 
 module.exports = routerApi;

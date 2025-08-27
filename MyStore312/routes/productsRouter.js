@@ -1,6 +1,6 @@
 const faker = require('faker');
 const express = require('express');
-const router = require('router')
+const router = express.Router();
 
 router.get("/", (req, res) => {
   const products = [];
