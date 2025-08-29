@@ -8,11 +8,16 @@ router.get("/", (req, res) => {
   const limit = size || 10;
   for (let index = 0; index < limit; index++) {
     products.push({
-    name: faker.commerce.productName(),
-    price: parseInt(faker.commerce.price(), 10),
-    image: faker.image.imageUrl()
-  });
-}
+      id: faker.datatype.uuid(),
+      image: faker.image.imageUrl(),
+      productName: faker.commerce.productName(),
+      description: faker.commerce.productDescription(),
+      price: faker.commerce.price(),
+      stock: faker.datatype.number({ min: 0, max: 100 }),
+      categoryId: index + 1,
+      brandId: index + 1
+    });
+  }
   res.json(products);
 });
 
@@ -23,9 +28,14 @@ router.get('/filter', (req, res) => {
 router.get("/:id", (req, res) =>{
   const { id } = req.params; // Extraemos el parametro id de los parametros ruta
   res.json({
-    id: parseInt(id), // Devolvemos el id recibido
-    name: 'Coca-Cola',
-    price: 50
+    id: id,
+    image: faker.image.imageUrl(),
+    productName: faker.commerce.productName(),
+    descripcion: faker.commerce.productDescription(),
+    price: faker.commerce.price(),
+    stock: faker.number.int({ min: 0, max: 100 }),
+    categoryId: faker.number.int({ min: 1, max: 5 }),
+    brandId: faker.number.int({ min: 1, max: 10 })
   });
 });
 
