@@ -14,8 +14,8 @@ router.get("/", (req, res) => {
       description: faker.commerce.productDescription(),
       price: faker.commerce.price(),
       stock: faker.datatype.number({ min: 0, max: 100 }),
-      categoryId: index + 1,
-      brandId: index + 1
+      categoryId: faker.datatype.number({ min: 1, max: 10 }),
+      brandId: faker.datatype.number({ min: 1, max: 10 })
     });
   }
   res.json(products);
