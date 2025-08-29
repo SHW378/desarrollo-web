@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
   const { id } = req.params;
   res.json({
     id: id,
-    brandName: faker.commerce.brandName(),
+    brandName: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     active: faker.datatype.boolean()
   });
