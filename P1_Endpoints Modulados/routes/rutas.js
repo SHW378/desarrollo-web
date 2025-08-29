@@ -5,3 +5,10 @@ function routerApi(app) {
 }
 
 module.exports = routerApi;
+
+const UserRouter = require('./UsersRouter')
+
+function routerApi(app) {
+  app.use('/users', UserRouter);
+}
+module.exports = routerApi;
