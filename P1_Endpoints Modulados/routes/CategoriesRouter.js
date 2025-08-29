@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
 router.get('/filter', (req, res) => {
   const { id } = req.params;
   res.json ({
-    Id: id,
+    id: id,
     categoryName: faker.commerce.department(),
     description: faker.commerce.productDescription(),
     active: faker.datatype.boolean()
