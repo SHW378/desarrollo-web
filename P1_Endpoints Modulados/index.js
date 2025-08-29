@@ -18,20 +18,6 @@ app.listen(port, () => {
   console.log("http://localhost:" + port)
 })
 
-
-app.get('/users', (req, res) => {
-  const { username, lastname } = req.query;
-  if (username && lastname ) {
-    res.json({
-      username,
-      lastname
-    });
-  } else {
-    res.send("No hay parametros Query");
-  }
-});
-
-
 app.get('/category/:categoryId/products/:productId', (req, res) => {
   const { categoryId, productId } = req.params;
   res.json({
