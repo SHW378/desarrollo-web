@@ -18,13 +18,17 @@ router.get("/", (req, res) => {
 });
 
 router.get('/filter', (req, res) => {
+  res.send('Soy una ruta de filtro')
+});
+
+router.get("/:id", (req, res) =>{
   const { id } = req.params;
-  res.json ({
+  res.json({
     id: id,
     categoryName: faker.commerce.department(),
     description: faker.commerce.productDescription(),
     active: faker.datatype.boolean()
-  })
-})
+  });
+});
 
 module.exports = router;

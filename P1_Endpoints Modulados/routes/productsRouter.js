@@ -31,57 +31,12 @@ router.get("/:id", (req, res) =>{
     id: id,
     image: faker.image.imageUrl(),
     productName: faker.commerce.productName(),
-    descripcion: faker.commerce.productDescription(),
+    description: faker.commerce.productDescription(),
     price: faker.commerce.price(),
-    stock: faker.number.int({ min: 0, max: 100 }),
-    categoryId: faker.number.int({ min: 1, max: 5 }),
-    brandId: faker.number.int({ min: 1, max: 10 })
+    stock: faker.datatype.number({ min: 0, max: 100 }),
+    categoryId: faker.datatype.number({ min: 1, max: 5 }),
+    brandId: faker.datatype.number({ min: 1, max: 10 })
   });
 });
 
-/*checar
-// Obtener productos por categoría
-router.get('/category/:categoryId', (req, res) => {
-  const { categoryId } = req.params;
-  const { size } = req.query;
-  const limit = size || 10;
-  const products = [];
-
-  for (let index = 0; index < limit; index++) {
-    products.push({
-      id: faker.datatype.uuid(),
-      image: faker.image.imageUrl(),
-      productName: faker.commerce.productName(),
-      description: faker.commerce.productDescription(),
-      price: faker.commerce.price(),
-      stock: faker.datatype.number({ min: 0, max: 100 }),
-      categoryId: parseInt(categoryId),
-      brandId: faker.datatype.number({ min: 1, max: 10 })
-    });
-  }
-  res.json(products);
-});
-
-// Obtener productos por marca
-router.get('/brand/:brandId', (req, res) => {
-  const { brandId } = req.params;
-  const { size } = req.query;
-  const limit = size || 10;
-  const products = [];
-
-  for (let index = 0; index < limit; index++) {
-    products.push({
-      id: faker.datatype.uuid(),
-      image: faker.image.imageUrl(),
-      productName: faker.commerce.productName(),
-      description: faker.commerce.productDescription(),
-      price: faker.commerce.price(),
-      stock: faker.datatype.number({ min: 0, max: 100 }),
-      categoryId: faker.datatype.number({ min: 1, max: 5 }),
-      brandId: parseInt(brandId)
-    });
-  }
-  res.json(products);
-});
-*/
 module.exports = router;
