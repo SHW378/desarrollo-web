@@ -26,6 +26,14 @@ app.get('/category/:categoryId/products/:productId', (req, res) => {
   });
 });
 
+app.get('/brand/:brandId/products/:productId', (req, res) => {
+  const { brandId, productId } = req.params;
+  res.json({
+    brandId,
+    productId
+  });
+});
+
 routerApi(app);
 /*
 GET = Obtiene datos
