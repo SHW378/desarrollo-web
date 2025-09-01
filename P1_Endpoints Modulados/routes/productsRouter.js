@@ -39,4 +39,42 @@ router.get("/:id", (req, res) =>{
   });
 });
 
+router.get('/category/:categoryId', (req, res) => {
+  const { categoryId } = req.params;
+  const products = [];
+  const limit = 10;
+  for (let index = 0; index < limit; index++) {
+    products.push({
+      id: faker.datatype.uuid(),
+      name: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price(), 10),
+      image: faker.image.imageUrl(),
+      descripcion: faker.commerce.productDescription(),
+      stock: faker.datatype.number({ min: 0, max: 360 }),
+      categoryId,
+      brandId: faker.datatype.uuid()
+    });
+  }
+  res.json(products);
+});
+
+router.get('/brand/:brandId', (req, res) => {
+  const { brandId } = req.params;
+  const products = [];
+  const limit = 10;
+  for (let index = 0; index < limit; index++) {
+    products.push({
+      id: faker.datatype.uuid(),
+      name: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price(), 10),
+      image: faker.image.imageUrl(),
+      descripcion: faker.commerce.productDescription(),
+      stock: faker.datatype.number({ min: 0, max: 360 }),
+      categoryId: faker.datatype.uuid(),
+      brandId
+    });
+  }
+  res.json(products);
+});
+
 module.exports = router;

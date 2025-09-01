@@ -17,22 +17,6 @@ app.listen(port, () => {
   console.log("http://localhost:" + port)
 })
 
-app.get('/category/:categoryId/products/:productId', (req, res) => {
-  const { categoryId, productId } = req.params;
-  res.json({
-    categoryId,
-    productId
-  });
-});
-
-app.get('/brand/:brandId/products/:productId', (req, res) => {
-  const { brandId, productId } = req.params;
-  res.json({
-    brandId,
-    productId
-  });
-});
-
 routerApi(app);
 /*
 GET = Obtiene datos
