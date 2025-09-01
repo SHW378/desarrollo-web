@@ -1,9 +1,8 @@
 const express = require('express');
-const app = express();
-const port = 3000;
 const faker = require('faker');
 const routerApi = require('./routes/rutas')
-
+const app = express();
+const port = 3000;
 //Middleware to parse JSON bodies
 app.get("/", (req, res) => {
   res.send("Hola mi server en express")
