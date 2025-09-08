@@ -2,12 +2,8 @@ const faker = require('faker');
 const express = require('express');
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  const brands = [];
-  const { size } = req.query;
-  const limit = size || 10;
-
-  for (let index = 0; index < limit; index++) {
+const brands = [];
+ for (let index = 0; index < 10; index++) {
     brands.push({
       id: faker.datatype.uuid(),
       brandName: faker.commerce.productName(),
@@ -15,6 +11,8 @@ router.get("/", (req, res) => {
       active: faker.datatype.boolean()
     });
   }
+
+router.get("/", (req, res) => {
   res.json(brands);
 });
 
@@ -24,12 +22,8 @@ router.get('/filter', (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  res.json({
-    id: id,
-    brandName: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
-    active: faker.datatype.boolean()
-  });
+  const brand = brands.find(b => b.id === id);
+  res.json(brand);
 });
 
 module.exports = router;

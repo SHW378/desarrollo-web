@@ -2,18 +2,17 @@ const faker = require('faker');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  const users = [];
-  const { size } = req.query;
-  const limit = size || 10;
-  for (let index = 0; index < limit; index++) {
+const users = [];
+  for (let index = 0; index < 10; index++) {
     users.push({
-      id: index + 1,
+      id: faker.datatype.uuid(),
       Name: faker.name.findName(),
       username: faker.name.findName(),
       password: faker.internet.password(),
     });
   }
+
+router.get('/', (req, res) => {
   res.json(users);
 });
 
@@ -23,12 +22,8 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id: id,
-    Name: faker.name.findName(),
-    username: faker.name.findName(),
-    password: faker.internet.password()
-  });
+  const user = users.find(item => item.id === id);
+  res.json(user);
 });
 
 module.exports = router;
