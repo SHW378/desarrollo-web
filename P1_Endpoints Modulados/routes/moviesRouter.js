@@ -51,9 +51,9 @@ router.post('/', (req, res) => {
 
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
-  const movieID = parseInt(id);
+  const movieIndex = parseInt(id);
   const { title, year, category } = req.body;
-  const movie = movies.find(m => m.id === movieID);
+  const movie = movies.find(m => m.id === movieIndex);
   if (movie) {
     if (title) movie.title = title;
     if (year) movie.year = year;
@@ -67,3 +67,18 @@ router.patch('/:id', (req, res) => {
   }
 
 });
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  const movieIndex = movies.findIndex(m => m.id === id);
+  if (movieIndex !== -1) {
+    movies.splice(movieIndex, 1);
+    res.json({
+      message: 'deleted',
+      id
+    })
+  } else {
+    res.status(404).json({ message: 'Movie not found' })
+  }
+})
+module.exports = router;

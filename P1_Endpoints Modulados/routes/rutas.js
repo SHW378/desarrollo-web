@@ -8,6 +8,7 @@ function routerApi(app) {
   app.use('/users', UserRouter);
   app.use('/categories', Categories);
   app.use('/brands', Brands);
+  app.use('/movies', require('./moviesRouter'));
 }
 
 module.exports = routerApi;
