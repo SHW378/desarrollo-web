@@ -33,3 +33,17 @@ router.get('/:id', (req, res) => {
   }
 
 })
+router.post('/', (req, res) => {
+  const { tittle, year, category } = req.body;
+  const newMovie = {
+    id: movies.length + 1,
+    title,
+    year,
+    category
+  }
+  movies.push(newMovie);
+  res.status(201).json({
+    message: 'created',
+    data: newMovie
+  });
+})
