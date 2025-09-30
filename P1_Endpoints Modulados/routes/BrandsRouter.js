@@ -61,8 +61,9 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const {id} = req.params;
-  const brandIndex = movies.findIndex(m => m.id ==id);
+  const brandIndex = brands.findIndex(m => m.id ==id);
   if(brandIndex !== -1) {
+    brands.splice(brandIndex, 1);
     res.json({
       message: 'Deleted',
       id
