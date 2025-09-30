@@ -32,14 +32,14 @@ router.get("/:id", (req, res) => {
 
 router.get('/category/:categoryId', (req, res) => {
   const { categoryId } = req.params;
-  const filteredProducts = products.filter(item => item.categoryId === categoryId);
+  const filteredProducts = products.filter(item => item.categoryId === Number(categoryId));
   res.json(filteredProducts);
 });
 
 router.get('/brand/:brandId', (req, res) => {
   const { brandId } = req.params;
-  const filteredProducts = products.filter(item => item.brandId === brandId);
-  res.json(Products);
+  const filteredProducts = products.filter(item => item.brandId === Number(brandId));
+  res.json(filteredProducts);
 });
 
 router.post('/', (req, res) => {
