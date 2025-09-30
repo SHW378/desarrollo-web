@@ -43,9 +43,9 @@ router.post('/', (req, res) =>{
 router.patch('/:id', (req, res) => {
   const  {id} = req.params;
   const {categoryName, description, active} = req.body;
-  const category = categories.find(cat => cat.id == id);
+  const category = categories.find(cat => cat.id === parseInt(id));
   if(category) {
-    if (tittle) category.categoryName = categoryName;
+    if(categoryName) category.categoryName = categoryName;
     if(description) category.description = description;
     if(active) category.active = active;
     res.json({

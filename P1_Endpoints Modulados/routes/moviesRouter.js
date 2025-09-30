@@ -25,14 +25,10 @@ router.get('/', (req, res) => {
 //
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  const movie = movie.find(m => m.id === id);
-  if (movie) {
+  const movie = movies.find(m => m.id === parseInt(id));
     res.json(movie);
-  } else {
-    res.status(404).json({ message: 'Movie not found' })
-  }
-
 })
+
 router.post('/', (req, res) => {
   const { tittle, year, category } = req.body;
   const newMovie = {
@@ -52,7 +48,7 @@ router.post('/', (req, res) => {
 router.patch("/:id", (req, res) => {
   const {id} = req.params;
   const {title, year, category} = req.body;
-  const movie = movies.find(m => m.id == id);
+  const movie = movies.find(m => m.id === parseInt(id));
   if(movie){
     if(title) movie.title = title;
      if(year) movie.year = year;
