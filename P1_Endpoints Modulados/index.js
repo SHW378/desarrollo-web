@@ -3,7 +3,10 @@ const faker = require('faker');
 const routerApi = require('./routes/rutas')
 const app = express();
 const port = 4000;
+
 //Middleware to parse JSON bodies
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hola mi server en express")
 })

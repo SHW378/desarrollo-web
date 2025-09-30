@@ -26,4 +26,49 @@ router.get('/:id', (req, res) => {
   res.json(user);
 });
 
+router.post('/', (req, res) => {
+  const { Name, username, password } = req.body;
+  const newUser = {
+    id: users.length + 1,
+    Name,
+    username,
+    password
+  };
+  users.push(newUser);
+  res.status(201).json({
+    message: 'created',
+    data: newUser
+  });
+});
+
+router.patch('/:id', (req, res) => {
+  const {id} = req.params;
+  const {Name, username, password} = req.body;
+  const user = users.find(item => item.id === parseInt(id));
+  if (user) {
+    if (Name) user.Name = Name;
+    if (username) user.username = username;
+    if (password) user.password = password;
+    res.json({
+      message:'Updated',
+      data: user
+    });
+  } else {
+    res.status(404).json({message: 'User not found'})
+  }
+});
+
+router.delete('/:id', (req, res) => {
+  const {id} = req.params;
+  const userIndex = users.findIndex(u => u.id == id)
+  if (userIndex !== -1) {
+    users.splice(userIndex,1)
+    res.json({
+      message: 'Deleted',
+      id
+    })
+  } else {
+    res.status(404).json({message: 'User not found'})
+  }
+})
 module.exports = router;

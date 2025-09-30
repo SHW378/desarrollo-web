@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { tittle, year, category } = req.body;
+  const { tittle, year, Category } = req.body;
   const newMovie = {
     id: movies.length + 1,
     title,
@@ -47,12 +47,12 @@ router.post('/', (req, res) => {
 
 router.patch("/:id", (req, res) => {
   const {id} = req.params;
-  const {title, year, category} = req.body;
+  const {title, year, Category} = req.body;
   const movie = movies.find(m => m.id === parseInt(id));
   if(movie){
     if(title) movie.title = title;
      if(year) movie.year = year;
-      if(category) movie.category = category;
+      if(Category) movie.Category = Category;
     res.json({
       message: 'Updated',
       data: movie
