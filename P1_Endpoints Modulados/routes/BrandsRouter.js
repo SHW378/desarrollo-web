@@ -6,7 +6,7 @@ const router = express.Router();
 const brands = [];
  for (let index = 0; index < 10; index++) {
     brands.push({
-      id: faker.datatype.uuid(),
+      id: index + 1,
       brandName: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
       active: faker.datatype.boolean()
@@ -23,8 +23,12 @@ router.get('/filter', (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  const brand = brands.find(b => b.id === id);
-  res.json(brand);
+  const brand = brands.find(b => b.id === parseInt(id));
+  if (brand) {
+    res.json(brand);
+  } else {
+    res.status(404).json({ message: 'Brand not found' });
+  }
 });
 
 router.post('/', (req, res) => {
@@ -47,29 +51,29 @@ router.patch('/:id', (req, res) => {
   const {brandName, description, active} = req.body;
   const brand = brands.find(b => b.id === parseInt(id));
   if (brand) {
-     if (brandName) brand.brandName = brandName;
-      if (description) brand.description = description;
-        if (active) brand.active = active;
+    if (brandName) brand.brandName = brandName;
+    if (description) brand.description = description;
+    if (active !== undefined) brand.active = active;
     res.json({
       message: 'Updated',
       data: brand
-    })
+    });
   } else {
     res.status(404).json({message: 'Brand not found'})
   }
-})
+});
 
 router.delete('/:id', (req, res) => {
   const {id} = req.params;
-  const brandIndex = brands.findIndex(m => m.id ==id);
+  const brandIndex = brands.findIndex(b => b.id === parseInt(id));
   if(brandIndex !== -1) {
     brands.splice(brandIndex, 1);
     res.json({
       message: 'Deleted',
       id
-    })
+    });
   } else{
     res.status(404).json({message: 'Brand not found'})
   }
-})
+});
 module.exports = router;

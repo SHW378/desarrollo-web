@@ -5,7 +5,7 @@ const router = express.Router();
 const users = [];
   for (let index = 0; index < 10; index++) {
     users.push({
-      id: faker.datatype.uuid(),
+      id: index + 1,
       Name: faker.name.findName(),
       username: faker.name.findName(),
       password: faker.internet.password(),
@@ -22,8 +22,12 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  const user = users.find(item => item.id === id);
-  res.json(user);
+  const movie = movies.find(m => m.id === parseInt(id));
+  if (movie) {
+    res.json(movie);
+  } else {
+    res.status(404).json({ message: 'Movie not found' });
+  }
 });
 
 router.post('/', (req, res) => {
@@ -41,34 +45,34 @@ router.post('/', (req, res) => {
   });
 });
 
-router.patch('/:id', (req, res) => {
+router.patch("/:id", (req, res) => {
   const {id} = req.params;
-  const {Name, username, password} = req.body;
-  const user = users.find(item => item.id === parseInt(id));
-  if (user) {
-    if (Name) user.Name = Name;
-    if (username) user.username = username;
-    if (password) user.password = password;
+  const {title, year, Category} = req.body;
+  const movie = movies.find(m => m.id === parseInt(id));
+  if(movie){
+    if(title) movie.title = title;
+    if(year) movie.year = year;
+    if(Category) movie.Category = Category;
     res.json({
-      message:'Updated',
-      data: user
+      message: 'Updated',
+      data: movie
     });
   } else {
-    res.status(404).json({message: 'User not found'})
+    res.status(404).json({ message: 'Movie not found' });
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) =>{
   const {id} = req.params;
-  const userIndex = users.findIndex(u => u.id == id)
-  if (userIndex !== -1) {
-    users.splice(userIndex,1)
+  const movieIndex = movies.findIndex(m => m.id === parseInt(id));
+  if(movieIndex !== -1){
+    movies.splice(movieIndex, 1);
     res.json({
       message: 'Deleted',
       id
-    })
+    });
   } else {
-    res.status(404).json({message: 'User not found'})
+    res.status(404).json({ message: 'Movie not found' });
   }
-})
+});
 module.exports = router;

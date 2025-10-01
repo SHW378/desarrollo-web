@@ -5,7 +5,7 @@ const router = express.Router();
 const products = [];
 for (let index = 0; index < 10; index++) {
   products.push({
-    id: faker.datatype.uuid(),
+    id: index + 1,
     image: faker.image.imageUrl(),
     productName: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
