@@ -22,11 +22,11 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  const movie = movies.find(m => m.id === parseInt(id));
-  if (movie) {
-    res.json(movie);
+  const user = users.find(u => u.id === parseInt(id));
+  if (user) {
+    res.json(user);
   } else {
-    res.status(404).json({ message: 'Movie not found' });
+    res.status(404).json({ message: 'User not found' });
   }
 });
 
@@ -47,32 +47,32 @@ router.post('/', (req, res) => {
 
 router.patch("/:id", (req, res) => {
   const {id} = req.params;
-  const {title, year, Category} = req.body;
-  const movie = movies.find(m => m.id === parseInt(id));
-  if(movie){
-    if(title) movie.title = title;
-    if(year) movie.year = year;
-    if(Category) movie.Category = Category;
+  const {Name, username, password} = req.body;
+  const user = users.find(u => u.id === parseInt(id));
+  if(user){
+    if(Name) user.Name = Name;
+    if(username) user.username = username;
+    if(password) user.password = password;
     res.json({
       message: 'Updated',
-      data: movie
+      data: user
     });
   } else {
-    res.status(404).json({ message: 'Movie not found' });
+    res.status(404).json({ message: 'User not found' });
   }
 });
 
 router.delete("/:id", (req, res) =>{
   const {id} = req.params;
-  const movieIndex = movies.findIndex(m => m.id === parseInt(id));
-  if(movieIndex !== -1){
-    movies.splice(movieIndex, 1);
+  const userIndex = users.findIndex(u => u.id === parseInt(id));
+  if(userIndex !== -1){
+    users.splice(userIndex, 1);
     res.json({
       message: 'Deleted',
       id
     });
   } else {
-    res.status(404).json({ message: 'Movie not found' });
+    res.status(404).json({ message: 'User not found' });
   }
 });
 module.exports = router;

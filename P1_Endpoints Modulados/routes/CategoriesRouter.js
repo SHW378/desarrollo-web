@@ -5,7 +5,7 @@ const router = express.Router();
 const categories = [];
   for (let index = 0; index < 10; index++) {
     categories.push({
-      Id: index + 1,
+      id: index + 1,
       categoryName: faker.commerce.department(),
       description: faker.commerce.productDescription(),
       active: faker.datatype.boolean()
@@ -21,11 +21,11 @@ router.get('/filter', (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  const brand = brands.find(b => b.id === parseInt(id));
-  if (brand) {
-    res.json(brand);
+  const category = categories.find(c => c.id === parseInt(id));
+  if (category) {
+    res.json(category);
   } else {
-    res.status(404).json({ message: 'Brand not found' });
+    res.status(404).json({ message: 'Category not found' });
   }
 });
 
@@ -47,7 +47,7 @@ router.post('/', (req, res) =>{
 router.patch('/:id', (req, res) => {
   const {id} = req.params;
   const {categoryName, description, active} = req.body;
-  const category = categories.find(cat => cat.Id === parseInt(id));
+  const category = categories.find(cat => cat.id === parseInt(id));
   if(category) {
     if(categoryName) category.categoryName = categoryName;
     if(description) category.description = description;
@@ -63,7 +63,7 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const {id} = req.params;
-  const categoryIndex = categories.findIndex(cat => cat.Id === parseInt(id));
+  const categoryIndex = categories.findIndex(cat => cat.id === parseInt(id));
   if (categoryIndex !== -1){
     categories.splice(categoryIndex, 1);
     res.json({

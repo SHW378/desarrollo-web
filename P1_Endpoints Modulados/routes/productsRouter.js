@@ -26,7 +26,7 @@ router.get('/filter', (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params; // Extraemos el parametro id de los parametros ruta
-  const product = products.find(item => item.id === id);
+  const product = products.find(item => item.id === parseInt(id));
   res.json(product);
 });
 
@@ -64,7 +64,7 @@ router.post('/', (req, res) => {
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const { image, productName, description, price, stock, categoryId, brandId } = req.body;
-  const product = products.find(item => item.id === id);
+  const product = products.find(item => item.id === parseInt(id));
   if (product) {
     if (image) product.image = image;
     if (productName) product.productName = productName;
@@ -84,7 +84,7 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  const productIndex = products.findIndex(item => item.id === id);
+  const productIndex = products.findIndex(item => item.id === parseInt(id));
   if (productIndex !== -1) {
     products.splice(productIndex, 1);
     res.json({
