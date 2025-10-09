@@ -33,13 +33,13 @@ Aquí están los pasos típicos. Ajusta aquellos pasos que cambien según tu imp
 
 | Paso | Acción | Detalles |
 |---|---|---|
-| 1 | Clonar el repositorio | ```bash<br>git clone https://github.com/SHW378/desarrollo-web.git<br>cd desarrollo-web``` |
-| 2 | Instalar dependencias | ```bash<br>npm install``` (o `yarn install`) |
+| 1 | Clonar el repositorio | ```bash<br> git clone https://github.com/SHW378/desarrollo-web.git<br>cd desarrollo-web``` |
+| 2 | Instalar dependencias | ```bash<br> npm install``` (o `yarn install`) |
 | 3 | Crear variables de entorno | Si el proyecto requiere configuraciones secretas (por ejemplo, DB, credenciales), crea un archivo `.env` basado en `.env.example` (si existe) |
 | 4 | Ejecutar migraciones / inicializar base de datos | Si usas base de datos, corre los scripts de migración o inicialización |
-| 5 | Ejecutar el proyecto en modo desarrollo | ```bash<br>npm run dev``` (o el script equivalente) |
+| 5 | Ejecutar el proyecto en modo desarrollo | ```bash<br> npm run dev``` (o el script equivalente) |
 | 6 | Abrir en el navegador | Generalmente en `http://localhost:3000` (o el puerto que tu proyecto use) |
-| 7 | (Opcional) Construir versión de producción | ```bash<br>npm run build``` y luego ```npm start``` |
+| 7 | (Opcional) Construir versión de producción | ```bash<br> npm run build``` y luego ```npm start``` |
 
 ---
 
