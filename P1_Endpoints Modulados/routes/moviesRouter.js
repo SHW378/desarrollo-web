@@ -16,7 +16,7 @@ let movies = [
   { id: 11, title: 'Perdida', year: 2012, Category: 'Drama' },
   { id: 12, title: '¿Y donde estan las rubias', year: 2004, Category: 'Comedia' },
 ]
-
+//
 //Obtener todas las peliculas
 router.get('/', (req, res) => {
   res.json(movies);

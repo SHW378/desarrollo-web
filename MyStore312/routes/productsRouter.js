@@ -1,19 +1,12 @@
 const faker = require('faker');
 const express = require('express');
+const productsService = require('../services/productsService');
 const router = express.Router();
+const Services = new productsService();
 
 router.get("/", (req, res) => {
-  const products = [];
-  const { size } = req.query;
-  const limit = size || 10;
-  for (let index = 0; index < limit; index++) {
-    products.push({
-    name: faker.commerce.productName(),
-    price: parseInt(faker.commerce.price(), 10),
-    image: faker.image.imageUrl()
-  });
-}
-  res.json(products);
+  const products = Services.getAll();
+  res.json({products})
 });
 
 router.get('/filter', (req, res) => {
@@ -21,20 +14,17 @@ router.get('/filter', (req, res) => {
 })
 
 router.get("/:id", (req, res) =>{
-  const { id } = req.params; // Extraemos el parametro id de los parametros ruta
-  res.json({
-    id: parseInt(id), // Devolvemos el id recibido
-    name: 'Coca-Cola',
-    price: 50
-  });
+  const { id } = req.params;
+  const product = Services.getById(id);
+  res.json({product});
 });
 
 router.post("/", (req, res) => {
   const body = req.body;
-  res.json({
-    message: 'created',
-    data: body
-  });
+  const newProduct = Services.create(body);
+  res.status(201).json(
+    newProduct
+  );
 });
 
 router.patch('/:id', (req, res) => {
@@ -57,3 +47,4 @@ router.delete('/:id', (req, res) => {
 })
 
 module.exports = router;
+
