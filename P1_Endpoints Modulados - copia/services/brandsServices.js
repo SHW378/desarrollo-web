@@ -1,11 +1,13 @@
+// Importar faker para generar datos de prueba
 const faker = require('faker')
 
 class brandsService {
   constructor() {
-    this.brands = []
-    this.generate()
+    this.brands = [] // Inicializar array de marcas
+    this.generate() // Generar datos de prueba al instanciar
   }
 
+  // Generar 10 marcas con datos aleatorios
   generate() {
     for (let index = 0; index < 10; index++) {
       this.brands.push({
@@ -17,23 +19,27 @@ class brandsService {
     }
   }
 
+  // Crear una nueva marca
   create(data) {
     const newBrand = {
-      id: faker.datatype.uuid(),
+      id: faker.datatype.uuid(), // Generar ID único
       ...data
     }
     this.brands.push(newBrand)
     return newBrand
   }
 
+  // Obtener todas las marcas
   getAll() {
     return this.brands
   }
 
+  // Obtener una marca por su ID
   getById(id) {
     return this.brands.find(item => item.id === id)
   }
 
+  // Actualizar una marca existente
   update(id, changes) {
     const index = this.brands.findIndex(item => item.id === id)
     if (index === -1) {
@@ -47,6 +53,7 @@ class brandsService {
     return this.brands[index]
   }
 
+  // Eliminar una marca
   delete(id) {
     const index = this.brands.findIndex(item => item.id === id)
     if (index === -1) {

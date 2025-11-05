@@ -1,36 +1,29 @@
+// Importación de dependencias necesarias
 const faker = require('faker');
 const express = require('express');
 const router = express.Router();
 const productsService = require('../services/productsService');
 const services = new productsService();
 
+// Obtener todos los productos
 router.get("/", (req, res) => {
   const products = services.getAll();
   res.json({products});
 });
 
+// Ruta de filtro (placeholder)
 router.get('/filter', (req, res) => {
   res.send('Soy una ruta de filtro')
 });
 
+// Obtener un producto por su ID
 router.get("/:id", (req, res) => {
   const { id } = req.params; // Extraemos el parametro id de los parametros ruta
   const product = services.getById(id);
   res.json({ product });
 });
-/*
-router.get('/category/:categoryId', (req, res) => {
-  const { categoryId } = req.params;
-  const filteredProducts = products.filter(item => item.categoryId === Number(categoryId));
-  res.json(filteredProducts);
-});
 
-router.get('/brand/:brandId', (req, res) => {
-  const { brandId } = req.params;
-  const filteredProducts = products.filter(item => item.brandId === Number(brandId));
-  res.json(filteredProducts);
-});
-*/
+// Crear un nuevo producto
 router.post('/', (req, res) => {
   const body = req.body;
   const newProduct = services.create(body);
@@ -39,6 +32,7 @@ router.post('/', (req, res) => {
   )
 });
 
+// Actualizar un producto por su ID
 router.patch('/:id', (req, res) => {
   const { id}  = req.params;
   const body = req.body;
@@ -46,10 +40,12 @@ router.patch('/:id', (req, res) => {
   res.json(product)
 });
 
+// Eliminar un producto por su ID
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
   const respuesta = services.delete(id);
   res.json(respuesta)
 });
 
+// Exportar el router
 module.exports = router;
