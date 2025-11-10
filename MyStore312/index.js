@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const faker = require('faker');
 const routerApi = require('./routes/rutas')
+const {logErrors, errorHandler} = require('./middleware/errorHandler')
 
 app.use(express.json());
 
@@ -43,6 +44,21 @@ app.get('/category/:categoryId/products/:productId', (req, res) => {
 });
 
 routerApi(app);
+app.use(logErrors);
+app.use(errorHandler);
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 GET = Obtiene datos
 POST = Crea datos
