@@ -3,6 +3,7 @@ const faker = require('faker');
 const routerApi = require('./routes/rutas')
 const app = express();
 const port = 4000;
+const setupSwagger = require("./swagger")
 
 //Middleware to parse JSON bodies
 app.use(express.json());
@@ -21,6 +22,7 @@ app.listen(port, () => {
 })
 
 routerApi(app);
+setupSwagger(app);
 /*
 GET = Obtiene datos
 POST = Crea datos

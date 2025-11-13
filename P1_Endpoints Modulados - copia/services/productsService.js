@@ -4,11 +4,21 @@ const faker = require("faker")
 class productsService {
   constructor() {
     this.products = [] // Inicializar array de productos
+    this.brandsServise = this.brandsServise
+    this.categoriesServise = this.categoriesServise
     this.generate() // Generar datos de prueba al instanciar
   }
 
   // Generar 10 productos con datos aleatorios
   generate() {
+    const brands = this.brandsServise.getAll();
+    const categories = this.categoriesServise.getAll();
+
+    if (brands.length === 0 || categories.length === 0) {
+      console.log("Error, no se puede generar sin brands ni categories");
+      return;
+    }
+
     for (let index = 0; index < 10; index++) {
       this.products.push({
         id: faker.datatype.uuid(),

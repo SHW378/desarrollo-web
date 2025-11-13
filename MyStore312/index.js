@@ -4,6 +4,7 @@ const port = 3000;
 const faker = require('faker');
 const routerApi = require('./routes/rutas')
 const {logErrors, errorHandler} = require('./middleware/errorHandler')
+const setupSwagger = require("./swagger")
 
 app.use(express.json());
 
@@ -44,9 +45,9 @@ app.get('/category/:categoryId/products/:productId', (req, res) => {
 });
 
 routerApi(app);
+setupSwagger(app);
 app.use(logErrors);
 app.use(errorHandler);
-
 
 
 
