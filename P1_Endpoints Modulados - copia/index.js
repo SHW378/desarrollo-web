@@ -1,5 +1,4 @@
 const express = require('express');
-const faker = require('faker');
 const routerApi = require('./routes/rutas')
 const app = express();
 const port = 4000;
@@ -23,6 +22,8 @@ app.listen(port, () => {
 
 routerApi(app);
 setupSwagger(app);
+
+
 /*
 GET = Obtiene datos
 POST = Crea datos

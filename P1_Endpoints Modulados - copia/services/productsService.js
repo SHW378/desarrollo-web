@@ -20,6 +20,9 @@ class productsService {
     }
 
     for (let index = 0; index < 10; index++) {
+      const randombrand = brands[Math.floor(Math.random() * brands.length)];
+      const randomcategory = categories[Math.floor(Math.random() * categories.length)];
+
       this.products.push({
         id: faker.datatype.uuid(),
         image: faker.image.imageUrl(),
@@ -27,12 +30,23 @@ class productsService {
         description: faker.commerce.productDescription(),
         price: faker.commerce.price(),
         stock: faker.datatype.number({ min: 0, max: 100 }),
+        brandId: randombrand,
+        categoryId: randomcategory
       });
     }
   }
 
   // Crear un nuevo producto
   create(data) {
+    const brand = this.brandsServise.getById(data.brandId);
+    if (!brand) {
+      return res.status(400).json({message: 'Brand no encontrada'})
+    }
+
+    const category = this.categoriesServise.getById(data.categoryId)
+    if (!category) {
+      return res.status(400).json({message: 'Category no encontrada'})
+    }
     const newProduct = {
       id: faker.datatype.uuid(), // Generar ID único
       ...data
@@ -74,6 +88,14 @@ class productsService {
     this.products.splice(index, 1)
     return { id }
   }
-}
 
+
+  brandEnUso(brandId) {
+    return this.products.some(product => product.brandId === brandId)
+  }
+
+  categoryEnUso(categoryId) {
+    return this.products.some(product => product.categoryId === categoryId)
+  }
+}
 module.exports = productsService;
