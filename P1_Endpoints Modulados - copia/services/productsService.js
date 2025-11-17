@@ -2,10 +2,10 @@
 const faker = require("faker")
 
 class productsService {
-  constructor() {
+  constructor(brandsServise, categoriesServise) {
     this.products = [] // Inicializar array de productos
-    this.brandsServise = this.brandsServise
-    this.categoriesServise = this.categoriesServise
+    this.brandsServise = brandsServise
+    this.categoriesServise = categoriesServise
     this.generate() // Generar datos de prueba al instanciar
   }
 
@@ -30,8 +30,8 @@ class productsService {
         description: faker.commerce.productDescription(),
         price: faker.commerce.price(),
         stock: faker.datatype.number({ min: 0, max: 100 }),
-        brandId: randombrand,
-        categoryId: randomcategory
+        brandId: randombrand.id,
+        categoryId: randomcategory.id
       });
     }
   }
