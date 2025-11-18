@@ -64,4 +64,4 @@ class brandsService {
   }
 }
 
-module.exports = brandsService
+module.exports = new brandsService

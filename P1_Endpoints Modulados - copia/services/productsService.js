@@ -1,11 +1,13 @@
 // Importar faker para generar datos de prueba
 const faker = require("faker")
+const brandsServise = require('./brandsServices');
+const categoriesServise = require('./categoriesServices');
 
 class productsService {
-  constructor(brandsServise, categoriesServise) {
+  constructor() { // Recibe los servicios de marcas y categorías como dependencias
     this.products = [] // Inicializar array de productos
-    this.brandsServise = brandsServise
-    this.categoriesServise = categoriesServise
+    this.brandsServise = brandsServise // Referencia al servicio de marcas
+    this.categoriesServise = categoriesServise // Referencia al servicio de categorías
     this.generate() // Generar datos de prueba al instanciar
   }
 
@@ -15,7 +17,7 @@ class productsService {
     const categories = this.categoriesServise.getAll();
 
     if (brands.length === 0 || categories.length === 0) {
-      console.log("Error, no se puede generar sin brands ni categories");
+      console.warn("Error, no se puede generar sin brands ni categories");
       return;
     }
 
@@ -40,12 +42,12 @@ class productsService {
   create(data) {
     const brand = this.brandsServise.getById(data.brandId);
     if (!brand) {
-      return res.status(400).json({message: 'Brand no encontrada'})
+      throw new Error('Brand no encontrada');
     }
 
     const category = this.categoriesServise.getById(data.categoryId)
     if (!category) {
-      return res.status(400).json({message: 'Category no encontrada'})
+      throw new Error('Category no encontrada');
     }
     const newProduct = {
       id: faker.datatype.uuid(), // Generar ID único
@@ -67,6 +69,18 @@ class productsService {
 
   // Actualizar un producto existente
   update(id, changes) {
+    if (changes.brandId) {
+      const brand = this.brandsServise.getById(changes.brandId);
+      if (!brand) {
+        throw new Error('Brand no encontrada');
+      }
+    }
+    if (changes.categoryId) {
+      const category = this.categoriesServise.getById(changes.categoryId);
+      if (!category) {
+        throw new Error('Category no encontrada');
+      }
+    }
     const index = this.products.findIndex(item => item.id === id)
     if (index === -1) {
       throw new Error('Product Not Found')
@@ -98,4 +112,4 @@ class productsService {
     return this.products.some(product => product.categoryId === categoryId)
   }
 }
-module.exports = productsService;
+module.exports = new productsService;

@@ -64,4 +64,4 @@ class categoriesService {
   }
 }
 
-module.exports = categoriesService
+module.exports = new categoriesService

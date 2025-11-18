@@ -65,4 +65,4 @@ class usersService {
   }
 }
 
-module.exports = usersService
+module.exports = new usersService
