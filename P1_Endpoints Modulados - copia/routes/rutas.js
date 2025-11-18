@@ -8,8 +8,7 @@ const brandsRouter = require('./BrandsRouter');
 function routerApi(app) {
   const router = express.Router();
   // Prefijo para todas las rutas
-  app.use('/api/v1', router);
-
+  app.use('/', router);
   // Asigna las rutas
   router.use('/products', productsRouter);
   router.use('/users', userRouter);
