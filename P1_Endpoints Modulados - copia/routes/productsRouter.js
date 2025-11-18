@@ -61,10 +61,16 @@ router.get("/:id", (req, res) => {
  *           schema:
  *             type: object
  *             properties:
+ *               image:
+ *                 type: string
  *               productName:
+ *                 type: string
+ *               description:
  *                 type: string
  *               price:
  *                 type: number
+ *               stock:
+ *                 type: integer
  *               brandId:
  *                 type: string
  *               categoryId:

@@ -64,6 +64,10 @@ router.get('/:id', (req, res) => {
  *             properties:
  *               categoryName:
  *                 type: string
+ *               description:
+ *                 type: string
+ *               active:
+ *                 type: boolean
  *     responses:
  *       201:
  *         description: Categoría creada.

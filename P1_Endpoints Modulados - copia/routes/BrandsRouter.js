@@ -64,6 +64,10 @@ router.get('/:id', (req, res) => {
  *             properties:
  *               brandName:
  *                 type: string
+ *               description:
+ *                 type: string
+ *               active:
+ *                type: boolean
  *     responses:
  *       201:
  *         description: Marca creada.
@@ -96,6 +100,10 @@ router.post('/', (req, res) => {
  *             properties:
  *               brandName:
  *                 type: string
+ *               description:
+ *                 type: string
+ *               active:
+ *                type: boolean
  *     responses:
  *       200:
  *         description: Marca actualizada.
