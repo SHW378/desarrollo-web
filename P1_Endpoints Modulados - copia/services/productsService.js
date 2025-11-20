@@ -95,7 +95,7 @@ class productsService {
 
   // Eliminar un producto
   delete(id) {
-    const index = this.products.findIndex(item)
+    const index = this.products.findIndex(item => item.id === id)
     if (index === -1 ){
       throw new Error('Product Not Found')
     }
